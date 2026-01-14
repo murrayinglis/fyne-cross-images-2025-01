@@ -1,11 +1,11 @@
 FROM debian:bookworm-slim AS base
 
-ENV GO_VERSION=1.24.6
-ENV GO_AMD64_CHECKSUM="bbca37cc395c974ffa4893ee35819ad23ebb27426df87af92e93a9ec66ef8712"
-ENV GO_ARM64_CHECKSUM="124ea6033a8bf98aa9fbab53e58d134905262d45a022af3a90b73320f3c3afd5"
-ENV ZIG_VERSION=0.14.1
+ENV GO_VERSION=1.25.5
+ENV GO_AMD64_CHECKSUM="9e9b755d63b36acf30c12a9a3fc379243714c1c6d3dd72861da637f336ebb35b"
+ENV GO_ARM64_CHECKSUM="b00b694903d126c588c378e72d3545549935d3982635ba3f7a964c9fa23fe3b9"
+ENV ZIG_VERSION=0.15.2
 ENV ZIG_MINISIGN_KEY="RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U"
-ENV FYNE_VERSION=v2.5.5
+ENV FYNE_VERSION=v1.7.0
 ENV FIXUID_VERSION=0.5.1
 ENV MINISIGN_VERSION=0.12
 
@@ -107,9 +107,9 @@ RUN set -eux; \
     go install -ldflags="-w -s" -v "github.com/fyne-io/fyne-cross/internal/cmd/fyne-cross-s3@develop"; \
     mv /go/bin/fyne-cross-s3 /usr/local/bin/fyne-cross-s3;
 
-# Install the fyne CLI tool
+# Install the Fyne CLI tools
 RUN set -eux; \ 
-    go install -ldflags="-w -s" -v "fyne.io/fyne/v2/cmd/fyne@${FYNE_VERSION}"; \
+    go install -ldflags="-w -s" -v "fyne.io/tools/cmd/fyne@${FYNE_VERSION}"; \
     mv /go/bin/fyne /usr/local/bin/fyne; \
     fyne version; \
     go clean -cache -modcache; \
